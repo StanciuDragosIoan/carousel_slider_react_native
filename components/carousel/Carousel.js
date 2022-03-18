@@ -11,16 +11,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {CarouselItem} from './carouselItem/CarouselItem';
+import {CarouselController} from './carouselController/CarouselController';
+
 const images = new Array(6).fill(
   'https://images.unsplash.com/photo-1556740749-887f6717d7e4',
 );
 
-export const Carousel = () => {
+export const Carousel = ({showControllers = true}) => {
   const scrollViewRef = useRef();
-  const test2 = imageIndex => {
-    console.log('test 123');
-    // scrollTo({x: 0, y: 0, animated: true});
-    // scrollViewRef.current.scrollToEnd({animated: true});
+  const scrollHandler = imageIndex => {
     scrollViewRef.current.scrollTo({
       x: windowWidth * imageIndex,
       y: 0,
@@ -34,58 +34,22 @@ export const Carousel = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.scrollContainer}>
-        <ScrollView
-          ref={scrollViewRef}
-          horizontal={true}
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: scrollX,
-                  },
-                },
-              },
-            ],
-            {useNativeDriver: false},
-          )}
-          scrollEventThrottle={1}>
-          {images.map((image, imageIndex) => {
-            return (
-              <View style={{width: windowWidth, height: 250}} key={imageIndex}>
-                <ImageBackground source={{uri: image}} style={styles.card}>
-                  <View style={styles.textContainer}>
-                    <Text style={styles.infoText}>
-                      {'Image - ' + imageIndex}
-                    </Text>
-                  </View>
-                </ImageBackground>
-              </View>
-            );
-          })}
-        </ScrollView>
-        <View style={styles.indicatorContainer}>
-          {images.map((image, imageIndex) => {
-            const width = scrollX.interpolate({
-              inputRange: [
-                windowWidth * (imageIndex - 1),
-                windowWidth * imageIndex,
-                windowWidth * (imageIndex + 1),
-              ],
-              outputRange: [8, 16, 8],
-              extrapolate: 'clamp',
-            });
-            return (
-              <TouchableOpacity
-                key={imageIndex}
-                onPress={() => test2(imageIndex)}>
-                <Animated.View style={[styles.normalDot, {width}]} />
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        <CarouselItem
+          scrollViewRef={scrollViewRef}
+          scrollX={scrollX}
+          images={images}
+          windowWidth={windowWidth}
+          styles={styles}
+        />
+        {showControllers && (
+          <CarouselController
+            scrollX={scrollX}
+            images={images}
+            windowWidth={windowWidth}
+            styles={styles}
+            scrollHandler={scrollHandler}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
