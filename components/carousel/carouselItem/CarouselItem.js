@@ -9,6 +9,7 @@ export const CarouselItem = ({
 }) => {
   return (
     <ScrollView
+      data-test="carousel-item"
       ref={scrollViewRef}
       horizontal={true}
       pagingEnabled

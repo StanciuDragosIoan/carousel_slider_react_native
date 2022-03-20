@@ -8,7 +8,7 @@ export const CarouselController = ({
   scrollHandler,
 }) => {
   return (
-    <View style={styles.indicatorContainer}>
+    <View style={styles.indicatorContainer} data-test="carousel-controller">
       {images.map((image, imageIndex) => {
         const width = scrollX.interpolate({
           inputRange: [

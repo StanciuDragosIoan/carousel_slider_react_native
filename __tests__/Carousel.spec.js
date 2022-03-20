@@ -1,23 +1,27 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import App from '../App';
+import {Carousel} from '../components/carousel/Carousel';
 import {findByTestAttr} from '../testUtils';
 
 /**
- * Factory function to create a ShallowWrapper for the App component.
+ * Factory function to create a ShallowWrapper for the Carousel component.
  * @function setup
  * @returns {ShallowWrapper}
  */
 const setup = () => {
-  const wrapper = shallow(<App />);
+  const wrapper = shallow(<Carousel />);
   return wrapper;
 };
 
-describe('Test App Entry point', function () {
+describe('Test Carousel Entry point', function () {
   let wrapper;
 
   beforeEach(() => {
     wrapper = setup();
+  });
+
+  afterEach(() => {
+    wrapper = null;
   });
 
   it('should render without error', () => {
@@ -25,7 +29,7 @@ describe('Test App Entry point', function () {
   });
 
   it('should render the main App component without error', () => {
-    const mainContainer = findByTestAttr(wrapper, 'main-app-container');
-    expect(mainContainer).toHaveLength(1);
+    const carouselComponent = findByTestAttr(wrapper, 'carousel-component');
+    expect(carouselComponent).toHaveLength(1);
   });
 });

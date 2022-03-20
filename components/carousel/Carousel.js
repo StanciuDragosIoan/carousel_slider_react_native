@@ -32,7 +32,7 @@ export const Carousel = ({showControllers = true}) => {
   const {width: windowWidth} = useWindowDimensions();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} data-test="carousel-component">
       <View style={styles.scrollContainer}>
         <CarouselItem
           scrollViewRef={scrollViewRef}
