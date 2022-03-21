@@ -2,6 +2,8 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {CarouselItem} from '../components/carousel/carouselItem/CarouselItem';
 import {findByTestAttr} from '../testUtils';
+import {render} from '@testing-library/react-native';
+import {ITERATOR_SYMBOL} from 'enzyme/build/Utils';
 
 const defaultProps = {
   images: [],
@@ -16,7 +18,7 @@ const setup = () => {
   return wrapper;
 };
 
-describe('Test CarouselItem Entry point', function () {
+describe('Test CarouselItem  component', function () {
   let wrapper;
 
   beforeEach(() => {
@@ -31,7 +33,7 @@ describe('Test CarouselItem Entry point', function () {
     expect(wrapper).toHaveLength(1);
   });
 
-  it('should render the main App component without error', () => {
+  it('should render the CarouselItem component without error', () => {
     const carouselItemComponent = findByTestAttr(wrapper, 'carousel-item');
     expect(carouselItemComponent).toHaveLength(1);
   });

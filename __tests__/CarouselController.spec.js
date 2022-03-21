@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import {CarouselController} from '../components/carousel/carouselController/CarouselController';
 import {findByTestAttr} from '../testUtils';
 
@@ -8,6 +8,7 @@ const defaultProps = {
     inidicatorContainer: {},
   },
   images: [],
+  scrollHandler: jest.fn(),
 };
 /**
  * Factory function to create a ShallowWrapper for the CarouselController component.
@@ -19,7 +20,7 @@ const setup = () => {
   return wrapper;
 };
 
-describe('Test CarouselController Entry point', function () {
+describe('Test CarouselController point', function () {
   let wrapper;
 
   beforeEach(() => {
@@ -34,7 +35,7 @@ describe('Test CarouselController Entry point', function () {
     expect(wrapper).toHaveLength(1);
   });
 
-  it('should render the main App component without error', () => {
+  it('should render the CarouselController without error', () => {
     const carouselControllerComponent = findByTestAttr(
       wrapper,
       'carousel-controller',

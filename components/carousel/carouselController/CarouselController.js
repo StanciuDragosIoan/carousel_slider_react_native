@@ -22,8 +22,12 @@ export const CarouselController = ({
         return (
           <TouchableOpacity
             key={imageIndex}
-            onPress={() => scrollHandler(imageIndex)}>
-            <Animated.View style={[styles.normalDot, {width}]} />
+            onPress={() => scrollHandler(imageIndex)}
+            aria-label="controllerBtnPlaceholder">
+            <Animated.View
+              style={[styles.normalDot, {width}]}
+              data-test="controller-btn"
+            />
           </TouchableOpacity>
         );
       })}

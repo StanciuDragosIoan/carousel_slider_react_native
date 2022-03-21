@@ -13,7 +13,7 @@ const setup = () => {
   return wrapper;
 };
 
-describe('Test Carousel Entry point', function () {
+describe('Test Carousel component', function () {
   let wrapper;
 
   beforeEach(() => {
@@ -28,8 +28,23 @@ describe('Test Carousel Entry point', function () {
     expect(wrapper).toHaveLength(1);
   });
 
-  it('should render the main App component without error', () => {
+  it('should render the Carousel component without error', () => {
     const carouselComponent = findByTestAttr(wrapper, 'carousel-component');
     expect(carouselComponent).toHaveLength(1);
+  });
+
+  it('should render the CarouselItem component X3 times (renders only 3 out of all items at a time)', () => {
+    wrapper = mount(<Carousel />);
+    const carouselItemComponent = findByTestAttr(wrapper, 'carousel-item');
+    expect(carouselItemComponent.length).toBe(3);
+  });
+
+  it('should render the CarouselController component', () => {
+    wrapper = mount(<Carousel />);
+    const carouselItemComponent = findByTestAttr(
+      wrapper,
+      'carousel-controller',
+    );
+    expect(carouselItemComponent.length).toBeGreaterThan(0);
   });
 });
