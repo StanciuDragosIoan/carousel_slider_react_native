@@ -33,23 +33,30 @@ export const CalendarFinal2 = () => {
   );
 
   const showCalendar = (currentMonth, currentYear) => {
-    const bodyRows = [
-      // [1, 2, 3, 4, 5, 6, 7],
-      // [8, 9, 10, 11, 12, 13, 14],
-      // [1, 2, 3, 4, 5, 6, 7],
-      // [1, 2, 3, 4, 5, 6, 7],
-      // [1, 2, 3, 4, 5, 6, 7],
-    ];
+    let firstDay = new Date(currentYear, currentMonth).getDay();
+    let daysInMonth = 32 - new Date(currentYear, currentMonth, 32).getDate();
+    const bodyRows = [];
     let row = [];
     let date = 1;
     for (let i = 1; i <= 35; i++) {
-      row.push(date);
-      if (i % 7 === 0) {
+      if (date <= daysInMonth) {
+        //calendar position
+        const weekPosition = new Date(currentYear, currentMonth, date).getDay();
+
+        console.log(weekPosition);
+
+        row[weekPosition] = date;
+      }
+      // 7 days
+      if (row.length === 7) {
         bodyRows.push(row);
         row = [];
       }
+
       date++;
     }
+
+    console.log(new Date(2022, 3, 1).getDay());
 
     return (
       <View>
@@ -91,7 +98,7 @@ export const CalendarFinal2 = () => {
   return (
     <View>
       <Text>{monthAndYear}</Text>
-      {showCalendar()}
+      {showCalendar(currentMonth, currentYear)}
     </View>
   );
 };
